@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Productivity App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Shadows+Into+Light&display=swap');
+
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Shadows Into Light', cursive;
+        }
+
+        .hero {
+            background-image: url('yourname.png'); /* Replace with anime-themed wallpaper */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 2px 2px 5px black;
+        }
+
+        .navbar-brand {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+        }
+
+        .reward-img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .reward-locked {
+            filter: grayscale(100%);
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .reward-unlocked {
+            filter: none;
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .task-completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        #tasks {
+            margin-right: 270px;
+        }
+
+        #daily-quotes {
+            margin-left: 30px;
+            margin-top: 20px;
+        }
+
+        .quote-box {
+            background-color: #ffedf0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-style: italic;
+            font-size: 1.2rem;
+        }
+
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 60px;
+            width: 250px;
+            height: calc(100vh - 60px);
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            overflow-y: auto;
+            font-family: 'Shadows Into Light', cursive;
+        }
+
+        .sidebar h4 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+        }
+
+        .sidebar img {
+            width: 100%;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar img:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Anime Productivity</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tasks">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#rewards">Rewards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="weekly-planner.html">Weekly Planner</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="unlocked-art.html">Unlocked Art</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Anime Productivity</h1>
+            <p>Your favorite anime-themed task tracker!</p>
+            <a href="#tasks" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Task and Quotes Section -->
+    <section id="tasks" class="py-5">
+        <div class="container d-flex">
+            <div class="flex-grow-1">
+                <h2 class="mb-4">Your Tasks</h2>
+                <!-- Task Input Form -->
+                <div class="mb-4">
+                    <input id="taskInput" type="text" class="form-control" placeholder="Add a new task...">
+                    <button id="addTaskButton" class="btn btn-primary mt-2">Add Task</button>
+                </div>
+                <!-- Task List -->
+                <ul id="taskList" class="list-group mb-4">
+                    <!-- Task Items Will Be Dynamically Added Here -->
+                </ul>
+            </div>
+
+            <!-- Daily Quotes Section -->
+            <div id="daily-quotes" class="flex-shrink-0">
+                <h4>Daily Motivational Quote</h4>
+                <div class="quote-box" id="quoteBox"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rewards Section -->
+    <section id="rewards" class="bg-light py-5">
+        <div class="container">
+            <h2 class="mb-4">Rewards</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="wallpaper1.png" alt="Reward 1" class="reward-img reward-locked" data-reward="3">
+                    <h5 class="mt-2">Anime Wallpaper</h5>
+                </div>
+                <div class="col-md-4">
+                    <img src="Mangaart2.png" alt="Reward 2" class="reward-img reward-locked" data-reward="5">
+                    <h5 class="mt-2">Exclusive Manga Art</h5>
+                </div>
+                <div class="col-md-4">
+                    <img src="https://via.placeholder.com/300x200" alt="Reward 3" class="reward-img reward-locked"
+                        data-reward="8">
+                    <h5 class="mt-2">Anime Theme Song Download</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sidebar for Unlocked Art -->
+    <aside class="sidebar">
+        <h4>Unlocked Art</h4>
+        <div id="sidebarArt">
+            <!-- Dynamically added unlocked art will appear here -->
+        </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3">
+        <div class="container text-center">
+            <p>© 2024 Anime Productivity. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript for Tasks, Rewards, and Weekly Planner -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const taskInput = document.getElementById("taskInput");
+            const addTaskButton = document.getElementById("addTaskButton");
+            const taskList = document.getElementById("taskList");
+            const quoteBox = document.getElementById("quoteBox");
+            const rewards = document.querySelectorAll(".reward-img");
+            const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+            let weeklyTasks = JSON.parse(localStorage.getItem("weeklyTasks")) || {};
+            let completedTasks = parseInt(localStorage.getItem("completedTasks")) || 0;
+
+            // Initialize weeklyTasks
+            daysOfWeek.forEach(day => {
+                if (!weeklyTasks[day]) {
+                    weeklyTasks[day] = [];
+                }
+            });
+
+            // Save tasks to localStorage
+            function saveWeeklyTasks() {
+                localStorage.setItem("weeklyTasks", JSON.stringify(weeklyTasks));
+            }
+
+            // Update rewards
+            function updateRewards() {
+                rewards.forEach(reward => {
+                    const requiredTasks = parseInt(reward.dataset.reward, 10);
+                    if (completedTasks >= requiredTasks) {
+                        reward.classList.remove("reward-locked");
+                        reward.classList.add("reward-unlocked");
+                    }
+                });
+            }
+
+            // Add task
+            addTaskButton.addEventListener("click", function () {
+                const taskText = taskInput.value.trim();
+                if (taskText !== "") {
+                    const listItem = document.createElement("li");
+                    listItem.className = "list-group-item d-flex justify-content-between align-items-center";
+                    listItem.innerHTML = `
+                        <span>${taskText}</span>
+                        <div>
+                            <button class="btn btn-sm btn-secondary me-2 assign-task">Assign</button>
+                            <button class="btn btn-sm btn-danger delete-task">Delete</button>
+                        </div>
+                    `;
+                    taskList.appendChild(listItem);
+                    taskInput.value = "";
+                }
+            });
+
+            // Assign task to a day
+            taskList.addEventListener("click", function (e) {
+                if (e.target.classList.contains("assign-task")) {
+                    const task = e.target.closest("li").querySelector("span").textContent;
+                    const day = prompt("Enter the day to assign this task (e.g., Monday):").trim();
+                    if (daysOfWeek.includes(day)) {
+                        weeklyTasks[day].push({ text: task, completed: false });
+                        saveWeeklyTasks();
+                        alert(`Task assigned to ${day}`);
+                    } else {
+                        alert("Invalid day entered!");
+                    }
+                } else if (e.target.classList.contains("delete-task")) {
+                    e.target.closest("li").remove();
+                }
+            });
+
+            // Load daily quote
+            const quotes = [
+                "A lesson without pain is meaningless. - Edward Elric",
+                "Fear is not evil. It teaches you what your weakness is. - Gildarts Clive",
+                "Power comes in response to a need, not a desire. - Goku",
+                "A person becomes strong when they have someone they want to protect. - Haku",
+                "In our society, letting others find out that you're a nice person is a very risky move. - Hitagi Senjougahara"
+            ];
+            quoteBox.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+            // Initial reward update
+            updateRewards();
+        });
+    </script>
+</body>
+
+</html>
